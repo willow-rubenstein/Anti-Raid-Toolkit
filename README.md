@@ -8,3 +8,4 @@ Open Source Toolkit For Combatting All Hate Raids On All Platforms
 ## Contact Me
 - Birb App: @MaleVTuber
 - Annoying Bitch Clyde App: Ashe#9450
+- Constant Fuck Up Platform: https://twitch.tv/MaleVTuber
