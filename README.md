@@ -6,6 +6,6 @@ Open Source Toolkit For Combatting All Hate Raids On All Platforms
 - src/subonly.py (will automatically turn on subs only when you go online+offline)
 
 ## Contact Me
-- Birb App: @MaleVTuber
+- Birb App: https://twitter.com/MaleVTuber
 - Annoying Bitch Clyde App: Ashe#9450
 - Constant Fuck Up Platform: https://twitch.tv/MaleVTuber
