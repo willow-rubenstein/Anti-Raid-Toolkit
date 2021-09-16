@@ -3,10 +3,18 @@ from twitchio.ext import commands
 from threading import Thread
 import re
 from emoji import UNICODE_EMOJI
+import unicodedata
 import json
 
 def is_emoji(s):
-    return s in UNICODE_EMOJI['en']
+  if s in UNICODE_EMOJI['en'] == False:
+      logic = unicodedata.name(s).find("REGIONAL INDICATOR SYMBOL LETTER")
+      if logic != -1:
+          return False
+      else:
+          return True
+  else:
+      return False
 
 users = []
 print(f"Starting chatFilter processes")
