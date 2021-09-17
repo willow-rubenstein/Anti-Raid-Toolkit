@@ -18,7 +18,7 @@ import requests
 import json
 from os import path
 
-file_path = path.abspath(__file__) # full path of your script
+file_path = path.abspath(__file__)
 dir_path = path.dirname(file_path)
 credentials_path = path.join(dir_path,'credentials.json')
 
