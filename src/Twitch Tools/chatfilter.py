@@ -23,7 +23,7 @@ import json
 emojis = [char for char in open('emojis.txt', encoding="utf-8").read()]
 
 def is_emoji(s):
-  if s not in emojis:
+  if s.decode('utf-8') not in emojis:
     return False
   else:
     return True
