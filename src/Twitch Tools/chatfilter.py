@@ -18,19 +18,15 @@ from websocket import create_connection
 from twitchio.ext import commands
 from threading import Thread
 import re
-from emoji import UNICODE_EMOJI
-import unicodedata
 import json
 
+emojis = [char for char in open('emojis.txt', encoding="utf-8").read()]
+
 def is_emoji(s):
-  if s in UNICODE_EMOJI['en'] == False:
-      logic = unicodedata.name(s).find("REGIONAL INDICATOR SYMBOL LETTER")
-      if logic != -1:
-          return False
-      else:
-          return True
+  if s not in emojis:
+    return False
   else:
-      return False
+    return True
 
 users = []
 print(f"Starting chatFilter processes")

@@ -59,7 +59,7 @@ class registerEventsub:
             },
             "transport": {
                 "method": "webhook",
-                "callback": "https://jcbotkm351.execute-api.us-east-2.amazonaws.com/beta",
+                "callback": "https://jcbotkm351.execute-api.us-east-2.amazonaws.com/test",
                 "secret": self.credentials['webhook-secret']
             }
         }
@@ -70,4 +70,4 @@ def registerUser(username):
     eventSubInstance = registerEventsub(username)
     eventSubInstance.createEventSub()
 
-registerUser('nyanners')
+registerUser('unicornraline')
