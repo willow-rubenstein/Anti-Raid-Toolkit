@@ -21,9 +21,13 @@ import re
 import json
 
 emojis = [char for char in open('emojis.txt', encoding="utf-8").read()]
+emoticons = []
+for line in open('emoticons.txt', 'r', encoding='utf-8').readlines():
+    emoticons.append(line.strip().strip('"').strip("'"))
 
 def is_emoji(s):
-  if s.decode('utf-8') not in emojis:
+  x = s.decode('utf-8')
+  if x not in emojis and x not in emoticons:
     return False
   else:
     return True
