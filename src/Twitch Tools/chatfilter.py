@@ -26,8 +26,7 @@ for line in open('emoticons.txt', 'r', encoding='utf-8').readlines():
     emoticons.append(line.strip().strip('"').strip("'"))
 
 def is_emoji(s):
-  x = s.decode('utf-8')
-  if x not in emojis and x not in emoticons:
+  if s not in emojis and s not in emoticons:
     return False
   else:
     return True
