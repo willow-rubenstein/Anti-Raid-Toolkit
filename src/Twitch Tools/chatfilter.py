@@ -26,7 +26,7 @@ for line in open('emoticons.txt', 'r', encoding='utf-8').readlines():
     emoticons.append(line.strip().strip('"').strip("'"))
 
 def is_emoji(s):
-  if s not in emojis and s not in emoticons:
+  if s not in emojis:
     return False
   else:
     return True
@@ -53,7 +53,7 @@ def evaluation(message, msgSender, username):
     for character in send:
         if character not in unicode and is_emoji(character) == False:
           failed += 1
-    if failed > 0:
+    if failed > 0 and send not in emoticons:
         print(f"Potentially malicious message found in channel {username}. Full message: {send}.")
         return False
     else:
