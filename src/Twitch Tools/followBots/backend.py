@@ -30,25 +30,26 @@ class registerEventsub:
         self.userId = self.getIdFromName()
     
     def getToken(self):
-        r = requests.post(f"https://id.twitch.tv/oauth2/token?client_id={self.credentials['id']}&client_secret={self.credentials['secret']}&grant_type=client_credentials")
+        r = requests.post(f"https://id.twitch.tv/oauth2/token?client_id={self.credentials['twitch']['id']}&client_secret={self.credentials['twitch']['secret']}&grant_type=client_credentials")
+        print(r.json())
         return f"Bearer {r.json()['access_token']}"
     
     def getIdFromName(self):
-        r = requests.get(f"https://api.twitch.tv/helix/users?login={self.name}", headers={"Authorization": self.accessToken, "Client-Id": self.credentials['id']})
+        r = requests.get(f"https://api.twitch.tv/helix/users?login={self.name}", headers={"Authorization": self.accessToken, "Client-Id": self.credentials['twitch']['id']})
         return r.json()['data'][0]['id']
 
     def listSubscriptions(self):
-        r = requests.get("https://api.twitch.tv/helix/eventsub/subscriptions", headers={"Authorization": self.accessToken, "Client-Id": self.credentials['id']})
+        r = requests.get("https://api.twitch.tv/helix/eventsub/subscriptions", headers={"Authorization": self.accessToken, "Client-Id": self.credentials['twitch']['id']})
         return r.json()
     
     def deleteSubscription(self, sub_id):
-        r = requests.delete(f"https://api.twitch.tv/helix/eventsub/subscriptions?id={sub_id}", headers={"Authorization": self.accessToken, "Client-Id": self.credentials['id']})
+        r = requests.delete(f"https://api.twitch.tv/helix/eventsub/subscriptions?id={sub_id}", headers={"Authorization": self.accessToken, "Client-Id": self.credentials['twitch']['id']})
         print(r)
 
     def createEventSub(self):
         headers = {
             "Authorization": self.accessToken,
-            "Client-Id": self.credentials['id'],
+            "Client-Id": self.credentials['twitch']['id'],
             "Content-Type": "application/json"
         }
         data = {
@@ -59,8 +60,8 @@ class registerEventsub:
             },
             "transport": {
                 "method": "webhook",
-                "callback": "https://jcbotkm351.execute-api.us-east-2.amazonaws.com/test",
-                "secret": self.credentials['webhook-secret']
+                "callback": self.credentials['pipedream']['post_endpoint'],
+                "secret": self.credentials['twitch']['eventsub_secret']
             }
         }
         r = requests.post("https://api.twitch.tv/helix/eventsub/subscriptions", headers=headers, data=json.dumps(data))
@@ -70,4 +71,4 @@ def registerUser(username):
     eventSubInstance = registerEventsub(username)
     eventSubInstance.createEventSub()
 
-registerUser('unicornraline')
+registerUser('malevtuber')
