@@ -22,8 +22,16 @@ botNames = ['hoss', 'host', 'zachsapttv', 'zachsaptv']
 credentials = json.load(open('credentials.json'))
 irc = credentials['twitch']['irc']
 
+
+def addToBanlist(username):
+    followlist = json.load(open('banlist.json'))['users']
+    if username not in followlist:
+        followlist.append(username)
+    json.dump({"users": followlist}, open('banlist.json', 'w+'), indent=4)
+    
 def banUser(username, broadcaster_name):
     print(f"Malicious follower event recieved for {broadcaster_name} (username: {username}). Banning from channel.")
+    addToBanlist(username)
     ws = create_connection('wss://irc-ws.chat.twitch.tv')
     ws.send(f"PASS {irc}")
     ws.send(f'NICK hateraidsbgone')

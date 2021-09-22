@@ -22,7 +22,6 @@ class eventListen:
         requests.delete(self.credentials['pipedream']['delete_endpoint'], headers={"Authorization": self.credentials['pipedream']['token']})
 
 e = eventListen()
-
 while True:
     e.runLogic()
     time.sleep(0.75)
