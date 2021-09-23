@@ -18,7 +18,7 @@ from websocket import create_connection
 from threading import Thread
 import json
 
-botNames = ['hoss', 'host', 'zachsapttv', 'zachsaptv']
+botNames = ['hoss', 'zachsapttv', 'zachsaptv', 'blueberrydogs']
 credentials = json.load(open('credentials.json'))
 irc = credentials['twitch']['irc']
 
