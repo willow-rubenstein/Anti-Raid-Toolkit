@@ -23,11 +23,12 @@ dir_path = path.dirname(file_path)
 credentials_path = path.join(dir_path,'credentials.json')
 
 class registerEventsub:
-    def __init__(self, name):
+    def __init__(self, name=None):
         self.name = name
         self.credentials = json.load(open(credentials_path))
         self.accessToken = self.getToken()
-        self.userId = self.getIdFromName()
+        if name != None:
+            self.userId = self.getIdFromName()
     
     def getToken(self):
         r = requests.post(f"https://id.twitch.tv/oauth2/token?client_id={self.credentials['twitch']['id']}&client_secret={self.credentials['twitch']['secret']}&grant_type=client_credentials")
@@ -60,7 +61,7 @@ class registerEventsub:
             },
             "transport": {
                 "method": "webhook",
-                "callback": self.credentials['pipedream']['post_endpoint'],
+                "callback": self.credentials['endpoint'],
                 "secret": self.credentials['twitch']['eventsub_secret']
             }
         }
@@ -71,4 +72,16 @@ def registerUser(username):
     eventSubInstance = registerEventsub(username)
     eventSubInstance.createEventSub()
 
-registerUser('malevtuber')
+def removeSubscriptions():
+    eventSubInstance = registerEventsub()
+    for item in eventSubInstance.listSubscriptions()['data']:
+        eventSubInstance.deleteSubscription(item['id'])
+
+def listSubscriptions():
+    eventSubInstance = registerEventsub()
+    print(json.dumps(eventSubInstance.listSubscriptions()['data'], indent=4))
+
+#registerUser('MaleVTuber')
+listSubscriptions()
+#removeSubscriptions()
+
