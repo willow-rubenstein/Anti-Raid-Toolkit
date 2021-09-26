@@ -81,7 +81,3 @@ def listSubscriptions():
     eventSubInstance = registerEventsub()
     print(json.dumps(eventSubInstance.listSubscriptions()['data'], indent=4))
 
-#registerUser('MaleVTuber')
-listSubscriptions()
-#removeSubscriptions()
-
