@@ -80,4 +80,3 @@ def removeSubscriptions():
 def listSubscriptions():
     eventSubInstance = registerEventsub()
     print(json.dumps(eventSubInstance.listSubscriptions()['data'], indent=4))
-    
